@@ -1,0 +1,303 @@
+= Decentralized Data Management
+
+% : subtitle
+%    Part 1
+: author
+   Giovanni Sakti
+: institution
+   Starqle
+% : content-source
+%    id_ruby
+% : date
+%    2017-11-01
+: theme
+   starqle
+
+= Decentralization
+
+(('tag:center'))Decentralization is an important theme with microservices architecture.
+
+== properties
+  : hide-title
+    true
+
+= Decentralization
+
+(('tag:center'))We already discuss about decentralized governance.
+
+= Decentralization
+
+(('tag:center'))Ideally ((*data management*)) should also be decentralized.
+
+= Decentralization
+
+(('tag:center'))And ((*database sharing*)) should be ((*forbidden*)).
+
+= Decentralization
+
+(('tag:center'))Services should call each others instead.
+
+= Decentralization
+
+(('tag:center'))But why decentralized data management is necessary?
+
+== properties
+  : hide-title
+    true
+
+= Benefits
+
+(('tag:center'))To ((*avoid*)) any kind of ((*coupling*)) (from database sharing).
+
+= Benefits
+
+(('tag:center'))((*Scaling*)) will be easier and it can be targeted too.
+
+= Benefits
+
+(('tag:center'))Best of all, we can do the ((*polyglot persistence*)) pattern.
+
+= Polyglot Persistence
+
+(('tag:center'))What is polyglot persistence?
+
+== properties
+  : hide-title
+    true
+
+= Polyglot Persistence
+
+(('tag:center'))In decentralized governance, we learned that teams can decide their own tools.
+
+= Polyglot Persistence
+
+(('tag:center'))With polyglot persistence, teams can also decide how to ((*store and manage*)) their own ((*data*)).
+
+= Polyglot Persistence
+
+(('tag:center'))Teams can pick data management system ((*most suitable*)) for their needs.
+
+= Polyglot Persistence
+
+(('tag:center'))Because different types of data have different storage requirements.
+
+= Polyglot Persistence
+
+* Read/Write Balance
+* Data Structure
+* Data Querying
+* Data Lifecycle
+* Data Size
+
+= Things to Keep an Eye on
+
+(('tag:center'))We have learned the benefits of decentralized data management.
+
+== properties
+  : hide-title
+    true
+
+= Things to Keep an Eye on
+
+(('tag:center'))So far so good..
+
+== properties
+  : hide-title
+    true
+
+= Things to Keep an Eye on
+
+(('tag:center'))Will there be any problems if we decentralized our data management?
+# Discuss
+
+== properties
+  : hide-title
+    true
+
+= Things to Keep an Eye on
+
+(('tag:center'))Turns out there are important things that ((*we should address*)) if we decentralized our data management.
+
+== properties
+  : hide-title
+    true
+
+= Things to Keep an Eye on
+
+(('tag:center'))For example: SQL JOIN
+
+= Things to Keep an Eye on
+
+(('tag:center'))Can we do SQL JOIN anymore?
+
+= Things to Keep an Eye on
+
+(('tag:center'))Even if we can, remember, SQL JOIN introduce coupling.
+
+= Things to Keep an Eye on
+
+(('tag:center'))And most of the time, the data will be physically separated anyway.
+
+= Things to Keep an Eye on
+
+(('tag:center'))Therefore it will be ((*impossible*)) to do ((*SQL JOIN*)).
+
+= Avoiding SQL JOIN
+
+(('tag:center'))But what if we need it anyway?
+
+= Avoiding SQL JOIN
+
+(('tag:center'))Previously, SQL JOIN is the most performant way to build aggregate data.
+
+= Avoiding SQL JOIN
+
+(('tag:center'))First step: Build ((*aggregate service*))
+
+= Avoiding SQL JOIN
+
+(('tag:center'))Build services that build aggregate data by fetching from multiple services.
+
+= Avoiding SQL JOIN
+
+(('tag:center'))But remember: now you have to consider ((*network latency*)) and ((*reliability*)) into account.
+
+= Avoiding SQL JOIN
+
+(('tag:center'))Therefore for the next step, you should design the service to be ((*coarser-grained*))
+
+= Avoiding SQL JOIN
+
+(('tag:center'))Do request in ((*batches*)) or ask for ((*more data*)) in a ((*single request*))
+
+= Avoiding SQL JOIN
+
+(('tag:center'))Avoid 'chatty' services design.
+# Services that request back-and-forth multiple times
+
+= Replacing Transaction
+
+(('tag:center'))There are also other elements that we use significantly in centralized data scenario..
+
+== properties
+  : hide-title
+    true
+
+= Replacing Transaction
+
+(('tag:center'))..that we couldn't use anymore.
+
+== properties
+  : hide-title
+    true
+
+= Replacing Transaction
+
+(('tag:center'))Yes it is ((*transaction*)).
+
+== properties
+  : hide-title
+    true
+
+= Replacing Transaction
+
+(('tag:center'))Transaction is an important feature that centralized data management have.
+
+= Replacing Transaction
+
+(('tag:center'))It ensures ACID.
+
+= Replacing Transaction
+
+(('tag:center'))It is also very critical to have especially for monetary-related operations.
+
+= Replacing Transaction
+
+(('tag:center'))Of course it is not possible anymore if the data management is decentralized.
+
+= Replacing Transaction
+
+(('tag:center'))How can we replace transaction?
+
+= Replacing Transaction
+
+(('tag:center'))Well, the first suggestion is: ((*Don't split services*)) that need transaction inside of it.
+
+= Replacing Transaction
+
+(('tag:center'))For example: Monetary operation including transaction that updates balance amount should ((*live as one service*))
+
+= Replacing Transaction
+
+(('tag:center'))Next, for non-critical services you can split those off.
+
+= Replacing Transaction
+
+(('tag:center'))We must have ((*eventual consistency*)) mindset in this scenario.
+
+= Replacing Transaction
+
+(('tag:center'))We trade off consistency with ((*performance*)) and ((*design simplicity*)).
+
+= Replacing Transaction
+
+(('tag:center'))If there are any problems, we do ((*compensating operations*)) instead.
+
+= Replacing Transaction
+
+(('tag:center'))It's paradigm altering to manage inconsistencies this way.
+
+= Replacing Transaction
+
+(('tag:center'))But in real world, not many operations in business needs strong consistency.
+
+= Replacing Transaction
+
+(('tag:center'))The trade-off with simplicity is worth it (most of the times).
+
+= Replacing Transaction
+
+(('tag:center'))Lastly, if we absolutely must have transaction across different services.
+
+= Replacing Transaction
+
+(('tag:center'))We can use ((*two-phase locking*)).
+
+= Replacing Transaction
+
+(('tag:center'))But remember to use it only as a ((*last resort*))
+
+= Explore Patterns
+
+(('tag:center'))We already discuss two major issues with decentralized data management.
+
+== properties
+  : hide-title
+    true
+
+= Explore Patterns
+
+(('tag:center'))There are also architectural patterns that we can utilize to make our life easier((-Distributed system is complex no matter how you put it-))
+
+== properties
+  : hide-title
+    true
+
+= Explore Patterns
+
+(('tag:center'))Some of them that we can explore further are:
+
+= Explore Patterns
+
+* CQRS
+* Event Sourcing
+* SAGA
+* Process Manager
+
+= Thanks
+
+(('tag:center'))Thanks!
+
+== properties
+  : hide-title
+    true
