@@ -156,7 +156,7 @@
 
 = Avoiding SQL JOIN
 
-(('tag:center'))Build services that build aggregate data by fetching from multiple services.
+(('tag:center'))Build services that build ((*aggregate data*)) by fetching from multiple services.
 
 = Avoiding SQL JOIN
 
@@ -205,11 +205,11 @@
 
 = Replacing Transaction
 
-(('tag:center'))It ensures ACID.
+(('tag:center'))It ensures ACID((-Atomicity, Consistency, Isolation, Durability-)).
 
 = Replacing Transaction
 
-(('tag:center'))It is also very critical to have especially for monetary-related operations.
+(('tag:center'))It is also very ((*critical*)) to have especially for monetary-related operations.
 
 = Replacing Transaction
 
@@ -245,15 +245,15 @@
 
 = Replacing Transaction
 
-(('tag:center'))It's paradigm altering to manage inconsistencies this way.
+(('tag:center'))It's ((*paradigm altering*)) to manage inconsistencies this way.
 
 = Replacing Transaction
 
-(('tag:center'))But in real world, not many operations in business needs strong consistency.
+(('tag:center'))But in real world, ((*not many*)) operations in business needs strong consistency.
 
 = Replacing Transaction
 
-(('tag:center'))The trade-off with simplicity is worth it (most of the times).
+(('tag:center'))The trade-off with simplicity is ((*worth it*)) (most of the times).
 
 = Replacing Transaction
 
@@ -261,7 +261,8 @@
 
 = Replacing Transaction
 
-(('tag:center'))We can use ((*two-phase locking*)).
+(('tag:center'))We can use ((*two-phase commit*)).
+# https://en.wikipedia.org/wiki/Two-phase_commit_protocol
 
 = Replacing Transaction
 
